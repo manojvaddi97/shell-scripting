@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "ALL variables passes : $@"
-echo "number of variables : @#"
+echo "number of variables : $#"
 echo "script name : $0"
 echo "present working directory: $PWD"
 echo "hoe directory of current user: $HOME"
