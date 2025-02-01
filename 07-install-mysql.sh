@@ -10,7 +10,7 @@ fi
 ###########################Install MYSQL#####################################
 
 dnf list installed mysql # checking if mysql is previously installed or not?
-if [ $? -ne 0] # checking if previous command output is successful or not?
+if [ $? -ne 0 ] # checking if previous command output is successful or not?
 then
     dnf install mysql -y # installing mysql
     if [ $? -ne 0 ]
