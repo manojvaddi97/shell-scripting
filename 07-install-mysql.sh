@@ -16,6 +16,7 @@ then
     if [ $? -ne 0 ]
     then
         exit 1
+    fi
     systemctl status mysql # checking status 
     if [ $? -ne 0 ]
     then
@@ -36,6 +37,7 @@ then
     if [ $? -ne 0 ]
     then
         exit 1
+    fi
     systemctl status git # checking status
     if [ $? -ne 0 ]
     then
