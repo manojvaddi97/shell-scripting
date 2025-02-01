@@ -22,6 +22,7 @@ then
         exit 1
     else
         echo "MYSQL is successfully installed"
+    fi
 else
     echo "MYSQL is already installed"
 fi
@@ -41,6 +42,7 @@ then
         exit 1
     else
         echo "Git is successfully installed"
+    fi
 else
     echo "Git is already installed"
 fi
