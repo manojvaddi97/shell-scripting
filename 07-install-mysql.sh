@@ -1,7 +1,7 @@
 #!/bin/bash
 
 USERID=$(id -u) # checking id of the user
-if [ $USERID -ne 0] # condition that checks if user id is root user or not?
+if [ $USERID -ne 0 ] # condition that checks if user id is root user or not?
 then
     echo "Error: You need sudo privileges to install the software"
     exit 1
