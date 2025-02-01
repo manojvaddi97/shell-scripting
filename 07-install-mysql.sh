@@ -15,12 +15,12 @@ then
     dnf install mysql -y # installing mysql
     if [ $? -ne 0 ]
     then
+        echo "Installing MYSQL Failed...."
         exit 1
-    fi
-    systemctl status mysql # checking status 
-    if [ $? -ne 0 ]
-    then
-        exit 1
+    # systemctl status mysql # checking status 
+    # if [ $? -ne 0 ]
+    # then
+    #     exit 1
     else
         echo "MYSQL is successfully installed"
     fi
@@ -36,12 +36,13 @@ then
     dnf install git -y # installing git
     if [ $? -ne 0 ]
     then
+        echo "Installing GIT Failed.."
         exit 1
-    fi
-    systemctl status git # checking status
-    if [ $? -ne 0 ]
-    then
-        exit 1
+    # fi
+    # systemctl status git # checking status
+    # if [ $? -ne 0 ]
+    # then
+    #     exit 1
     else
         echo "Git is successfully installed"
     fi
