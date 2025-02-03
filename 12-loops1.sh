@@ -20,10 +20,10 @@ fi
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo "$2 is... Failed"
+        echo "$2 is... $R Failed $N"
         exit 1
     else
-        echo "$2 is... Successful"
+        echo "$2 is... $G Successful $N"
     fi
 }
 #check if packages are already installed
@@ -35,6 +35,6 @@ do
         dnf install $package -y &>>$LOGFILE_NAME
         VALIDATE $? "$package Installation"
     else
-        echo "$package Installation already exists"
+        echo -e "$package Installation $Y already exists $N"
     fi
 done
