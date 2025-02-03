@@ -8,13 +8,8 @@ DIR="/var/log/shell_scripts"
 LOGFILE=$(echo $0 | cut -d '.' -f1)
 TIMESTAMP=$(date +"%m-%d-%Y-%H-%M-%S")
 LOGFILE_NAME=$DIR/$LOGFILE-$TIMESTAMP
-
 USERID=$(id -u)
-if [ USERID -ne 0 ]
-then
-    echo "Error: user need to have sudo privileges"
-    exit 1
-fi
+
 
 VALIDATE(){
     if [ $1 -ne 0 ]
@@ -30,10 +25,16 @@ VALIDATE(){
     fi
 }
 
-dnf list installed mysql  >> &LOGFILE_NAME # checking if mysql is previously installed or not?
+if [ USERID -ne 0 ]
+then
+    echo "Error: user need to have sudo privileges"
+    exit 1
+fi
+
+dnf list installed mysql  >>&LOGFILE_NAME # checking if mysql is previously installed or not?
 if [ $? -ne 0 ] # checking if previous command output is successful or not?
 then
-    dnf install mysql -y >> &LOGFILE_NAME # installing mysql
+    dnf install mysql -y >>&LOGFILE_NAME # installing mysql
     VALIDATE $1 "MYSQL Installation"
 else
     echo -e "MYSQL is $Y already installed $N"
@@ -41,10 +42,10 @@ fi
 
 ################################### Installing GIT ############################################
 
-dnf list installed git >> &LOGFILE_NAME # checking if git is previously installed
+dnf list installed git >>&LOGFILE_NAME # checking if git is previously installed
 if [ $? -ne 0 ]
 then
-    dnf install git -y >> &LOGFILE_NAME # installing git
+    dnf install git -y >>&LOGFILE_NAME # installing git
     VALIDATE $1 "GIT Installation"
 else
     echo -e "Git is $Y already installed $N"
