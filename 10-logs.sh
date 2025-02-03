@@ -26,19 +26,20 @@ VALIDATE(){
     fi
 
 }
-dnf list installed mysql
+dnf list installed mysql &>>$LOGFILE_NAME
 if [ $? -ne 0 ]
 then
-    dnf install mysql -y
+    dnf install mysql -y &>>$LOGFILE_NAME
     VALIDATE $1 "MYSQL Installation"
 else
     echo -e "MYSQL Installation $Y already exits $N"
 fi
 
 
-dnf list installed git
+dnf list installed git &>>$LOGFILE_NAME
 if [ $? -ne 0 ]
 then
+    dnf install git -y &>>$LOGFILE_NAME
     VALIDATE $1 "GIT Installation"
 else
     echo -e "GIT Installation $Y already exists $N"
