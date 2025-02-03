@@ -1,6 +1,11 @@
 #!/bin/bash
 
 USERID=$(id -u)
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+
 if [ $USERID -ne 0 ]
 then
     echo "ERROR: you need sudo privileges to perform this action"
@@ -10,10 +15,10 @@ fi
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo "$2 Failed"
+        echo -e "$2 $R Failed $N"
         exit 1
     else
-        echo "$2 Successfull"
+        echo -e "$2 $G Successfull $N"
     fi
 
 }
@@ -23,7 +28,7 @@ then
     dnf install mysql -y
     VALIDATE $1 "MYSQL Installation"
 else
-    echo "MYSQL Installation already exits"
+    echo -e "MYSQL Installation $Y already exits $N"
 fi
 
 
@@ -32,5 +37,5 @@ if [ $? -ne 0 ]
 then
     VALIDATE $1 "GIT Installation"
 else
-    echo "GIT Installation already exists"
+    echo -e "GIT Installation $Y already exists $N"
 fi
