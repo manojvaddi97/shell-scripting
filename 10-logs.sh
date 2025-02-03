@@ -5,6 +5,10 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+LOGFILE_DIR="/var/log/shell_scripts"
+LOGFILE=$(echo $0 | cut -d "." -f1)
+TIMESTAMP=$(date +%m-%d-%Y-%H-%M-%S)
+LOGFILE_NAME="$LOGFILE_DIR/$LOGFILE-$TIMESTAMP.log"
 
 if [ $USERID -ne 0 ]
 then
