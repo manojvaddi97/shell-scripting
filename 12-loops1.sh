@@ -27,17 +27,14 @@ VALIDATE(){
     fi
 }
 #check if packages are already installed
-dnf list installed $package &>>$LOGFILE_NAME
-if [ $? -ne 0 ]
-then
-    for package in $@
-    do
+for package in $@
+do
+    dnf list installed $package &>>$LOGFILE_NAME
+    if [ $? -ne 0 ]
+    then
         dnf install $package -y &>>$LOGFILE_NAME
         VALIDATE $1 "$package Installation"
-    done
-    # dnf install mysql -y
-    # if [ $? -ne 0 ]
-    # VALIDATE $1 "MYSQL Installation"
-else
-    echo "$package Installation already exists"
-fi
+    else
+        echo "$package Installation already exists"
+    fi
+done
