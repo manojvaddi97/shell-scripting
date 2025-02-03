@@ -17,8 +17,10 @@ then
         exit 1
     else
         echo "MYSQL Installation Successfull"
+    fi
 else
     echo "MYSQL Installation already exits"
+fi
 
 
 dnf list installed git
@@ -31,5 +33,7 @@ then
         exit 1
     else
         echo "GIT Installation Successfull"
+    fi
 else
     echo "GIT Installation already exists"
+fi
