@@ -44,3 +44,5 @@ then
     echo -e "$R $DEST_DIR does not exit.. please check"
     exit 1
 fi
+
+FILES=$(find $SOURCE_DIR -name "*.log" -mtime $DAYS)
