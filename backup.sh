@@ -45,4 +45,4 @@ then
     exit 1
 fi
 
-FILES=$(find $SOURCE_DIR -name "*.log" -mtime $DAYS)
+FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
