@@ -51,7 +51,7 @@ if [ -n "$FILES" ]
 then
     echo "Files are: $FILES"
     ZIP_FILE=$DEST_DIR/app-logs-$TIMESTAMP.zip
-    $FILES | zip -@ "$ZIP_FILE"
+    find $SOURCE_DIR -name "*.log" -mtime +$DAY| zip -@ "$ZIP_FILE"
 else
     echo "No files found older than $DAYS"
 fi
