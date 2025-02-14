@@ -9,7 +9,7 @@ SOURCE_DIR=$1
 DEST_DIR=$2
 DAYS=${3:-14} #if user is not providing no of days then default is 14.
 LOGFILE_DIR="/home/ec2-user/app_logs"
-LOGFILE=$(echo $0 | cut -d "." -f1)
+LOGFILE=$(echo $0 | awk -F "/" '$print{$NF}' | cut -d "." -f1)
 TIMESTAMP=$(date +%m-%d-%Y-%H-%M-%S)
 LOGFILE_NAME="$LOGFILE_DIR/$LOGFILE-$TIMESTAMP.log"
 
