@@ -54,7 +54,7 @@ then
     find $SOURCE_DIR -name "*.log" -mtime +$DAYS| zip -@ "$ZIP_FILE"
     if [ -f "$ZIP_FILE" ]
     then
-        echo -e "$G Succesfully created zip file"
+        echo -e "$G Succesfully created zip file $N"
         while read -r filepath
         do
             echo "Deleting files: $filepath"
