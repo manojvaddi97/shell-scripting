@@ -5,7 +5,7 @@ DISK_THRESHOLD=5
 
 while read -r usage;
 do
-    USAGE=$(echo $usage | awk -F " " '{print $6F}')
+    USAGE=$(echo $usage | awk -F " " '{print $6F}' | cut -d "%" -f1)
     PARTITION=$(echo $usage | awk -F " " '{print $NF}')
     echo "partition: $PARTITION usage is $USAGE"
 done <<< $DISK_USAGE
