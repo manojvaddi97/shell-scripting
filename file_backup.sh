@@ -53,6 +53,7 @@ then
         done <<< $FILES 
     else
         echo "could not zip the files"
+    fi
 else
     echo "No files exists older than $DAYS"
 fi
