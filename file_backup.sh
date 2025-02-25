@@ -37,19 +37,19 @@ then
     exit 1
 fi
 
-FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
+FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS) &>>$LOGFILE_NAME
 
 if [ -n "$FILES" ]
 then
     ZIP_FILE="$DEST_DIR/app-logs/$TIMESTAMP.zip"
-    find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip -@ $ZIP_FILE
+    find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip -@ $ZIP_FILE &>>$LOGFILE_NAME
     if [ -f $ZIP_FILE ]
     then
         while read -r filepath;
         do
-            echo "Deleting files"
+            echo "Deleting files" &>>$LOGFILE_NAME
             rm -rf $filepath
-            echo "Deleted files"
+            echo "Deleted files" &>>$LOGFILE_NAME
         done <<< $FILES 
     else
         echo "could not zip the files"
