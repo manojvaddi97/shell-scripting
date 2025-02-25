@@ -28,13 +28,13 @@ then
     exit 1
 fi
 
-Files= $(find $SOURCE_DIR -name "*.log" -mtime +$DAYS) # find the files older than 14 days
+Files= $(find $SOURCE -name "*.log" -mtime +$DAYS) # find the files older than 14 days
 
 if [ -n "$FILES" ] # checking if files are present
 then
     echo "Files are: $FILES"
     ZIP_FILE="$DESTINATION/app-logs-$TIMESTAMP.zip" # creating zipfile indestination folder
-    find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip @ $ZIP_FILE #ziping the files
+    find $SOURCE -name "*.log" -mtime +$DAYS | zip @ $ZIP_FILE #ziping the files
     if [ -f "$ZIP_FILE" ] # if zip files exists
     then
         echo "Successfully created zip files"
