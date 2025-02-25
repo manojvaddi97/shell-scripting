@@ -1,52 +1,60 @@
+#############################  File Backup script ###################################
+#Requirements:
+#user needs to pass source and destination directories as arguments
+#if both of them are not passed throw an error
+#if directories are passed check if they actually exits? if not throw an error
+#check if files are present in the directory
+#if present zip the files
+#delete the existing files
+######################################################################################
+
 #!/bin/bash
 
-#source; destination; daterange; copy; delete
-
-SOURCE=$1 #pass source folder
-DESTINATION=$2 # pass destination folder
+SOURCE_DIR=$1
+DEST_DIR=$2
 DAYS=14
 TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
+
 LOGFILE_DIR="/home/ec2-user/scripts"
-LOGFILE=$(echo $0 | awk -F "/" '{print $NF}' | cut -d "." -f1 )
+LOGFILE=$(echo $0 | awk -F "/" '{print $NF}' | cut -d "." -f1)
 LOGFILE_NAME="$LOGFILE_DIR/$LOGFILE-$TIMESTAMP.log"
 
-if [ $# -lt 2 ] # comparing if no of arguments passed are less than 2
+if [ $# -lt 2 ] # checking if user is passing both the arguments
 then
     echo "Usage: <script_name> <source_dir> <dest_dir>"
     exit 1
 fi
 
-if [ ! -d $SOURCE ] #checking if source directory doesn't exits
+if [ ! -d $SOURCE_DIR ]
 then
-    echo "Error: please check if directory exists"
+    echo "please check if directory exits"
     exit 1
 fi
 
-if [ ! -d $DESTINATION ] # checking if destination directory doesn't exits
+if [ ! -d $DEST_DIR ]
 then
-    echo "Error: please check if directory exists"
+    echo "please check if directory exits"
     exit 1
 fi
 
-FILES=$(find $SOURCE -name "*.log" -mtime +$DAYS) # find the files older than 14 days
+FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
 
-if [ -n "$FILES" ] # checking if files are present
+if [ -n "$FILES" ]
 then
-    echo "Files are: $FILES"
-    ZIP_FILE="$DESTINATION/app-logs-$TIMESTAMP.zip" # creating zipfile indestination folder
-    find $SOURCE -name "*.log" -mtime +$DAYS | zip -@ $ZIP_FILE #ziping the files
-    if [ -f "$ZIP_FILE" ] # if zip files exists
+    ZIP_FILE="$DEST_DIR/app-logs/$TIMESTAMP.zip"
+    find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip -@ $ZIP_FILE
+    if [ -f $ZIP_FILE ]
     then
-        echo "Successfully created zip files"
-        while read -r filepath; # read the files
+        while read -r filepath;
         do
-            echo "Deleting files: $filepath"
-            rm -rf $filepath # delete the files
-            echo "Deleted files: $filepath"
-        done <<< $FILES
+            echo "Deleting files"
+            rm -rf $filepath
+            echo "Deleted files"
+        done <<< $FILES 
     else
         echo "could not zip the files"
-    fi
 else
-    echo "No files foumd older than $DAYS"
+    echo "No files exists older than $DAYS"
 fi
+
+
