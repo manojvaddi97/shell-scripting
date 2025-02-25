@@ -28,7 +28,7 @@ then
     exit 1
 fi
 
-Files= $(find $SOURCE -name "*.log" -mtime +$DAYS) # find the files older than 14 days
+FILES=$(find $SOURCE -name "*.log" -mtime +$DAYS) # find the files older than 14 days
 
 if [ -n "$FILES" ] # checking if files are present
 then
